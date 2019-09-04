@@ -1,0 +1,10 @@
+<ng-container #flow="flow" [flowConfig]="{target: 'http://localhost:3000/upload'}">
+  <input type="file"
+      flowButton
+      [flow]="flow.flowJs"
+      [flowAttributes]="{accept: 'image/*'}">
+</ng-container>
+
+<div *ngFor="let transfer of (flow.transfers$ | async).transfers">{{ transfer.name }}</div>
+
+<button type="button" (click)="flow.upload()" [disabled]="!(flow.somethingToUpload$ | async)">Start upload</button>
